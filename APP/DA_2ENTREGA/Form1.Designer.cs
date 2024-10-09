@@ -29,77 +29,54 @@
         private void InitializeComponent()
         {
             this.SaioaHasi = new System.Windows.Forms.Label();
-            this.ErabiltzaieaTextBox = new System.Windows.Forms.TextBox();
-            this.PasahitzaTextBox = new System.Windows.Forms.TextBox();
-            this.Erabiltzailea = new System.Windows.Forms.Label();
-            this.PasahitzaLabel = new System.Windows.Forms.Label();
             this.SaioaHasiButton = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // SaioaHasi
             // 
             this.SaioaHasi.AutoSize = true;
-            this.SaioaHasi.Location = new System.Drawing.Point(214, 47);
+            this.SaioaHasi.BackColor = System.Drawing.SystemColors.Control;
+            this.SaioaHasi.Location = new System.Drawing.Point(59, 54);
+            this.SaioaHasi.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.SaioaHasi.Name = "SaioaHasi";
-            this.SaioaHasi.Size = new System.Drawing.Size(129, 25);
+            this.SaioaHasi.Size = new System.Drawing.Size(151, 13);
             this.SaioaHasi.TabIndex = 0;
-            this.SaioaHasi.Text = "SAIOA HASI\r\n";
+            this.SaioaHasi.Text = "AUKERATU ERABILTZAILEA";
             this.SaioaHasi.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // ErabiltzaieaTextBox
-            // 
-            this.ErabiltzaieaTextBox.Location = new System.Drawing.Point(199, 132);
-            this.ErabiltzaieaTextBox.Name = "ErabiltzaieaTextBox";
-            this.ErabiltzaieaTextBox.Size = new System.Drawing.Size(168, 31);
-            this.ErabiltzaieaTextBox.TabIndex = 1;
-            this.ErabiltzaieaTextBox.TextChanged += new System.EventHandler(this.Erabiltzaiea_TextChanged);
-            // 
-            // PasahitzaTextBox
-            // 
-            this.PasahitzaTextBox.Location = new System.Drawing.Point(199, 195);
-            this.PasahitzaTextBox.Name = "PasahitzaTextBox";
-            this.PasahitzaTextBox.Size = new System.Drawing.Size(168, 31);
-            this.PasahitzaTextBox.TabIndex = 2;
-            // 
-            // Erabiltzailea
-            // 
-            this.Erabiltzailea.AutoSize = true;
-            this.Erabiltzailea.Location = new System.Drawing.Point(51, 138);
-            this.Erabiltzailea.Name = "Erabiltzailea";
-            this.Erabiltzailea.Size = new System.Drawing.Size(142, 25);
-            this.Erabiltzailea.TabIndex = 3;
-            this.Erabiltzailea.Text = "Erabiltzailea: ";
-            // 
-            // PasahitzaLabel
-            // 
-            this.PasahitzaLabel.AutoSize = true;
-            this.PasahitzaLabel.Location = new System.Drawing.Point(74, 201);
-            this.PasahitzaLabel.Name = "PasahitzaLabel";
-            this.PasahitzaLabel.Size = new System.Drawing.Size(119, 25);
-            this.PasahitzaLabel.TabIndex = 4;
-            this.PasahitzaLabel.Text = "Pasahitza: \r\n";
             // 
             // SaioaHasiButton
             // 
-            this.SaioaHasiButton.Location = new System.Drawing.Point(199, 297);
+            this.SaioaHasiButton.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.SaioaHasiButton.Location = new System.Drawing.Point(86, 129);
+            this.SaioaHasiButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.SaioaHasiButton.Name = "SaioaHasiButton";
-            this.SaioaHasiButton.Size = new System.Drawing.Size(144, 72);
+            this.SaioaHasiButton.Size = new System.Drawing.Size(86, 43);
             this.SaioaHasiButton.TabIndex = 5;
             this.SaioaHasiButton.Text = "Saioa hasi";
-            this.SaioaHasiButton.UseVisualStyleBackColor = true;
+            this.SaioaHasiButton.UseVisualStyleBackColor = false;
             this.SaioaHasiButton.Click += new System.EventHandler(this.SaioaHasiButton_Click);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(72, 79);
+            this.comboBox1.MaxDropDownItems = 32;
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 6;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(525, 435);
+            this.ClientSize = new System.Drawing.Size(262, 226);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.SaioaHasiButton);
-            this.Controls.Add(this.PasahitzaLabel);
-            this.Controls.Add(this.Erabiltzailea);
-            this.Controls.Add(this.PasahitzaTextBox);
-            this.Controls.Add(this.ErabiltzaieaTextBox);
             this.Controls.Add(this.SaioaHasi);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form1";
             this.Text = "SaioHasiera";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -111,11 +88,8 @@
         #endregion
 
         private System.Windows.Forms.Label SaioaHasi;
-        private System.Windows.Forms.TextBox ErabiltzaieaTextBox;
-        private System.Windows.Forms.TextBox PasahitzaTextBox;
-        private System.Windows.Forms.Label Erabiltzailea;
-        private System.Windows.Forms.Label PasahitzaLabel;
         private System.Windows.Forms.Button SaioaHasiButton;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 
