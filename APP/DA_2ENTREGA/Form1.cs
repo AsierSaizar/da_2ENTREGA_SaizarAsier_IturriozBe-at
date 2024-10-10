@@ -26,34 +26,27 @@ namespace DA_2ENTREGA
 
             try
             {
-                // Abre la conexión
                 connection.Open();
 
-                // Consulta SQL
-                string query = "SELECT erabiltzaileIzena FROM erabiltzailea"; // Ajusta el nombre de la columna
+                string query = "SELECT erabiltzaileIzena FROM erabiltzailea";
 
-                // Ejecuta la consulta
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
 
-                // Lee los resultados y añádelos al ComboBox
                 while (reader.Read())
                 {
                     string erabiltzaileIzena = reader.GetString("erabiltzaileIzena");
                     comboBox1.Items.Add(erabiltzaileIzena);
                 }
 
-                // Cierra el lector de datos
                 reader.Close();
             }
             catch (Exception ex)
             {
-                // Muestra el mensaje de error en caso de que falle algo
-                MessageBox.Show("Error al conectar a la base de datos: " + ex.Message);
+                MessageBox.Show(ex.Message);
             }
             finally
             {
-                // Asegura que la conexión se cierra después de su uso
                 connection.Close();
             }
         }
@@ -72,6 +65,16 @@ namespace DA_2ENTREGA
 
         private void SaioaHasiButton_Click(object sender, EventArgs e)
         {
+            if (comboBox1.Items.Count != 0)
+            {
+                string erabiltzaileAukeratua = comboBox1.SelectedItem.ToString();
+                Form2 form2 = new Form2();
+                form2.Show();
+            }
+            else
+            {
+                Console.WriteLine("Mesedez, aukeratu erabiltzaile bat.");
+            }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
