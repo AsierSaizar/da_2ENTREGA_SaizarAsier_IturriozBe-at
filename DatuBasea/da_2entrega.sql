@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
--- Host: localhost    Database: ig_2entrega
+-- Host: localhost    Database: da_2entrega
 -- ------------------------------------------------------
 -- Server version	8.0.34
 
@@ -26,8 +26,7 @@ CREATE TABLE `erabiltzailea` (
   `langilea_id` int NOT NULL,
   `erabiltzaileIzena` varchar(20) NOT NULL,
   `erabiltzailePasahitza` varchar(25) NOT NULL,
-  PRIMARY KEY (`langilea_id`),
-  CONSTRAINT `fk_erabiltzailea_langilea` FOREIGN KEY (`langilea_id`) REFERENCES `langilea` (`id`)
+  PRIMARY KEY (`langilea_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -77,4 +76,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-07 14:24:13
+-- Dump completed on 2024-10-10 19:22:28
