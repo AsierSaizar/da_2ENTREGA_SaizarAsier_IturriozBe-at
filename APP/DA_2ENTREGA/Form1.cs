@@ -20,7 +20,6 @@ namespace DA_2ENTREGA
         {
             InitializeComponent();
 
-            // Cadena de conexión
             string conexiodatuak = "server=localhost;port=3306;user id=root;password=1WMG2023;database=da_2entrega;SslMode=none";
             connection = new MySqlConnection(conexiodatuak);
 

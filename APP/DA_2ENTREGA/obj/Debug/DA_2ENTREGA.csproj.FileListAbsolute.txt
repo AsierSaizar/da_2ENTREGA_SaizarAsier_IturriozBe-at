@@ -84,3 +84,4 @@ C:\Users\Beñat\Desktop\DA_2ENTREGA\da_2ENTREGA_SaizarAsier_IturriozBe-at\APP\DA
 C:\Users\Beñat\Desktop\DA_2ENTREGA\da_2ENTREGA_SaizarAsier_IturriozBe-at\APP\DA_2ENTREGA\obj\Debug\DA_2ENTREGA.csproj.CopyComplete
 C:\Users\Beñat\Desktop\DA_2ENTREGA\da_2ENTREGA_SaizarAsier_IturriozBe-at\APP\DA_2ENTREGA\obj\Debug\DA_2ENTREGA.exe
 C:\Users\Beñat\Desktop\DA_2ENTREGA\da_2ENTREGA_SaizarAsier_IturriozBe-at\APP\DA_2ENTREGA\obj\Debug\DA_2ENTREGA.pdb
+C:\Users\Beñat\Desktop\DA_2ENTREGA\da_2ENTREGA_SaizarAsier_IturriozBe-at\APP\DA_2ENTREGA\obj\Debug\DA_2ENTREGA.Form2.resources
