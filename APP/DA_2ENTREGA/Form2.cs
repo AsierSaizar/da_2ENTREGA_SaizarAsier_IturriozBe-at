@@ -196,6 +196,71 @@ namespace DA_2ENTREGA
 
 
             }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (this.idLangileaSeleccionado > 0)
+            {
+                // Mostrar un cuadro de diálogo para confirmar si se desea borrar el langilea
+                DialogResult result = MessageBox.Show("Seguru zaide langile hau ezabatu nahi duzula?",
+                                                      "ERANTZUN!",
+                                                      MessageBoxButtons.YesNo,
+                                                      MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    // Tu cadena de conexión a MySQL
+                    string connectionString = "server=localhost;port=3306;user id=root;password=1WMG2023;database=da_2entrega;SslMode=none";
+
+                    // Consulta SQL para realizar un soft delete (actualizar la columna 'borratua')
+                    string query = "UPDATE langilea SET borratua = 1 WHERE id = @idLangilea";
+
+                    // Usamos MySqlConnection y MySqlCommand
+                    using (MySqlConnection connection = new MySqlConnection(connectionString))
+                    {
+                        try
+                        {
+                            // Abrimos la conexión
+                            connection.Open();
+
+                            // Creamos el comando con la consulta
+                            using (MySqlCommand command = new MySqlCommand(query, connection))
+                            {
+                                // Añadimos el parámetro para evitar inyección de SQL
+                                command.Parameters.AddWithValue("@idLangilea", this.idLangileaSeleccionado);
+
+                                // Ejecutamos la consulta
+                                int filasAfectadas = command.ExecuteNonQuery();
+
+                                // Verificamos si la actualización fue exitosa
+                                if (filasAfectadas > 0)
+                                {
+                                    MessageBox.Show("El langilea ha sido borrado correctamente (soft delete).");
+                                }
+                                else
+                                {
+                                    MessageBox.Show("No se encontró el langilea o no se pudo borrar.");
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error: " + ex.Message);
+                        }
+                        finally
+                        {
+                            // Cerrar la conexión y refrescar los datos en el DataGridView
+                            connection.Close();
+                            CargarDatos();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Selecciona un langilea antes de continuar.");
+            }
+        }
     }
 }
 
