@@ -15,7 +15,7 @@ namespace DA_2ENTREGA
         {
             InitializeComponent();
             CargarDatos();
-            
+            IzenBuruaJarri();
             
 
             // Conectamos el evento SelectionChanged
@@ -38,7 +38,9 @@ namespace DA_2ENTREGA
             catch
             {
                 MessageBox.Show("Konexio arazoak");
+
             }
+
             try
             {
                 string query = "SELECT * FROM da_2entrega.langilea";
@@ -54,11 +56,15 @@ namespace DA_2ENTREGA
             }
         }
 
-       
+
 
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
+        }
+        private void IzenBuruaJarri()
+        {
+            textBox5.Text = "Kaixo "+UserSession.ErabiltzaileIzena+"!";
         }
 
         private void CargarDatos()
@@ -131,6 +137,60 @@ namespace DA_2ENTREGA
         {
 
         }
+
+            private void button1_Click_1(object sender, EventArgs e)
+            {
+                String izenBerria = textBox2.Text;
+                String abizenBerria = textBox3.Text;
+                String kKorronteBerria = textBox4.Text;
+                DateTime jDataBerria = dateTimePicker1.Value;
+                String jDataBerriaSt = jDataBerria.ToString("yyyy-MM-dd");
+            Console.WriteLine(izenBerria);
+
+                // Tu cadena de conexión a MySQL
+                string connectionString = "server=localhost;port=3306;user id=root;password=1WMG2023;database=da_2entrega;SslMode=none";
+
+
+
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    try
+                    {
+                        string query = "INSERT INTO langilea (izena, abizena, kKorrontea, jaiotzeData) VALUES (@Nombre, @Apellido, @kkorrontea, @FechaNacimiento)";
+
+                        // Abrir la conexión
+                        connection.Open();
+
+                        // Crear el comando con la consulta y la conexión
+                        using (MySqlCommand command = new MySqlCommand(query, connection))
+                        {
+                            // Asignar los valores a los parámetros
+                            command.Parameters.AddWithValue("@Nombre", izenBerria);
+                            command.Parameters.AddWithValue("@Apellido", abizenBerria);
+                            command.Parameters.AddWithValue("@kkorrontea", kKorronteBerria);
+                            command.Parameters.AddWithValue("@FechaNacimiento", jDataBerriaSt);
+
+                            // Ejecutar la consulta
+                            command.ExecuteNonQuery();
+                        }
+                        textBox2.Text="";
+                        textBox3.Text="";
+                        textBox4.Text="";
+
+                }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: " + ex.Message);
+                    }
+                    finally 
+                    { 
+                        connection.Close();
+                        CargarDatos();
+                    }
+                }
+
+
+            }
     }
 }
 
