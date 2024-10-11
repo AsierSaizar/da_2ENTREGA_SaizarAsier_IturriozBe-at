@@ -10,21 +10,15 @@ namespace DA_2ENTREGA
     public partial class Form2 : Form
     {
         MySqlConnection connection;
+        private int idLangileaSeleccionado = -1;
 
         public Form2()
         {
             InitializeComponent();
             CargarDatos();
             IzenBuruaJarri();
-            
 
-            // Conectamos el evento SelectionChanged
             dataGridView2.SelectionChanged += new EventHandler(dataGridView2_SelectionChanged);
-            
-
-
-
-
 
         }
 
@@ -108,24 +102,35 @@ namespace DA_2ENTREGA
                 // Tomamos la primera fila seleccionada
                 DataGridViewRow filaSeleccionada = dataGridView2.SelectedRows[0];
 
-                // Obtenemos el valor de la columna "izena" y lo mostramos en el TextBox
+                // Obtenemos el valor de la columna "id_langilea" y lo guardamos en una variable
+                int idLangileaSeleccionado = Convert.ToInt32(filaSeleccionada.Cells["id"].Value);
+
+                // Mostrar en un TextBox u otro control si lo deseas
                 textBox1.Text = filaSeleccionada.Cells["izena"].Value.ToString();
+
+                // Guardamos el valor en una variable de clase para usarlo al abrir el siguiente formulario
+                this.idLangileaSeleccionado = idLangileaSeleccionado; // Variable de clase
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            // Verificar que se haya seleccionado un langilea antes de abrir el Form3
+            if (this.idLangileaSeleccionado > 0)
+            {
+                // Pasar el id_langilea seleccionado al Form3
+                Form3 form3 = new Form3(this.idLangileaSeleccionado);
+                form3.Show();
+            }
+            else
+            {
+                MessageBox.Show("Selecciona un langilea antes de continuar.");
+            }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
+            //Console.WriteLine(textBox1);
         }
 
         private void label1_Click(object sender, EventArgs e)
