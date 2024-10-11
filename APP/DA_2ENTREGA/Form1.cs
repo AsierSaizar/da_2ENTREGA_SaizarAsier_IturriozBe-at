@@ -67,19 +67,59 @@ namespace DA_2ENTREGA
 
         private void SaioaHasiButton_Click(object sender, EventArgs e)
         {
-            if (comboBox1.SelectedItem == null)
             {
-                Console.WriteLine("Mesedez, aukeratu erabiltzaile bat.");
-            }
-            else
-            {
+                if (comboBox1.SelectedItem == null)
+                {
+                    Console.WriteLine("Mesedez, aukeratu erabiltzaile bat.");
+                }
+                else
+                {
+                    // Obtener el nombre del usuario seleccionado
+                    string selectedErabiltzaileIzena = comboBox1.SelectedItem.ToString();
 
-                var selectedItem = comboBox1.SelectedItem as dynamic; // Obtener el item seleccionado
-                UserSession.ErabiltzaileIzena = selectedItem.Text; // Guardar el nombre
-                UserSession.IdErabiltzailea = selectedItem.Value; // Guardar el ID
+                    // Nueva consulta a la base de datos para obtener el ID del usuario seleccionado
+                    string query = "SELECT langilea_id FROM erabiltzailea WHERE erabiltzaileIzena = @erabiltzaileIzena";
+                    MySqlCommand command = new MySqlCommand(query, connection);
 
-                Form2 form2 = new Form2();
-                form2.Show();
+                    // Añadir el parámetro para evitar SQL injection
+                    command.Parameters.AddWithValue("@erabiltzaileIzena", selectedErabiltzaileIzena);
+
+                    try
+                    {
+                        connection.Open();
+
+                        // Ejecutar la consulta
+                        MySqlDataReader reader = command.ExecuteReader();
+
+                        if (reader.Read())
+                        {
+                            // Obtener el ID del usuario
+                            int idErabiltzailea = reader.GetInt32("langilea_id");
+
+                            // Guardar la información en UserSession
+                            UserSession.ErabiltzaileIzena = selectedErabiltzaileIzena;
+                            UserSession.IdErabiltzailea = idErabiltzailea;
+
+                            // Abrir la nueva ventana
+                            Form2 form2 = new Form2();
+                            form2.Show();
+                        }
+                        else
+                        {
+                            Console.WriteLine("No se encontró el usuario en la base de datos.");
+                        }
+
+                        reader.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    finally
+                    {
+                        connection.Close();
+                    }
+                }
             }
         }
 
