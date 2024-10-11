@@ -73,6 +73,7 @@ namespace DA_2ENTREGA
             }
             else
             {
+
                 var selectedItem = comboBox1.SelectedItem as dynamic; // Obtener el item seleccionado
                 UserSession.ErabiltzaileIzena = selectedItem.Text; // Guardar el nombre
                 UserSession.IdErabiltzailea = selectedItem.Value; // Guardar el ID
