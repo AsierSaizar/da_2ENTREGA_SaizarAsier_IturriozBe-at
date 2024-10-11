@@ -12,6 +12,8 @@ using MySql.Data.MySqlClient;
 
 namespace DA_2ENTREGA
 {
+    
+
     public partial class Form1 : Form
     {
         private MySqlConnection connection;
@@ -27,7 +29,7 @@ namespace DA_2ENTREGA
             {
                 connection.Open();
 
-                string query = "SELECT erabiltzaileIzena FROM erabiltzailea";
+                string query = "SELECT erabiltzaileIzena FROM erabiltzailea;";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -64,21 +66,27 @@ namespace DA_2ENTREGA
 
         private void SaioaHasiButton_Click(object sender, EventArgs e)
         {
-            if (comboBox1.Items.Count != 0)
+            if (comboBox1.SelectedItem == null)
             {
-                string erabiltzaileAukeratua = comboBox1.SelectedItem.ToString();
-                Form2 form2 = new Form2();
-                form2.Show();
+                Console.WriteLine("Mesedez, aukeratu erabiltzaile bat.");
             }
             else
             {
-                Console.WriteLine("Mesedez, aukeratu erabiltzaile bat.");
+                UserSession.ErabiltzaileIzena = comboBox1.SelectedItem.ToString();
+                //string erabiltzaile = UserSession.ErabiltzaileIzena;
+                //Console.WriteLine("Erabiltzaile aukeratua: " + erabiltzaile);
+                Form2 form2 = new Form2();
+                form2.Show();
             }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
         }
+    }
+    public static class UserSession
+    {
+        public static string ErabiltzaileIzena { get; set; }
     }
 }
 
