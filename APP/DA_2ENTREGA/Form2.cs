@@ -58,7 +58,7 @@ namespace DA_2ENTREGA
         }
         private void IzenBuruaJarri()
         {
-            textBox5.Text = "Kaixo "+UserSession.ErabiltzaileIzena+"!";
+            textBox5.Text = "Kaixo " + UserSession.ErabiltzaileIzena + "!";
         }
 
         private void CargarDatos()
@@ -143,67 +143,67 @@ namespace DA_2ENTREGA
 
         }
 
-            private void button1_Click_1(object sender, EventArgs e)
-            {
-                String izenBerria = textBox2.Text;
-                String abizenBerria = textBox3.Text;
-                String kKorronteBerria = textBox4.Text;
-                DateTime jDataBerria = dateTimePicker1.Value;
-                String jDataBerriaSt = jDataBerria.ToString("yyyy-MM-dd");
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            String izenBerria = textBox2.Text;
+            String abizenBerria = textBox3.Text;
+            String kKorronteBerria = textBox4.Text;
+            DateTime jDataBerria = dateTimePicker1.Value;
+            String jDataBerriaSt = jDataBerria.ToString("yyyy-MM-dd");
             Console.WriteLine(izenBerria);
 
-                // Tu cadena de conexión a MySQL
-                string connectionString = "server=localhost;port=3306;user id=root;password=1WMG2023;database=da_2entrega;SslMode=none";
+            // Tu cadena de conexión a MySQL
+            string connectionString = "server=localhost;port=3306;user id=root;password=1WMG2023;database=da_2entrega;SslMode=none";
 
 
 
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                try
                 {
-                    try
+                    string query = "INSERT INTO langilea (izena, abizena, kKorrontea, jaiotzeData) VALUES (@Nombre, @Apellido, @kkorrontea, @FechaNacimiento)";
+
+                    // Abrir la conexión
+                    connection.Open();
+
+                    // Crear el comando con la consulta y la conexión
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
-                        string query = "INSERT INTO langilea (izena, abizena, kKorrontea, jaiotzeData) VALUES (@Nombre, @Apellido, @kkorrontea, @FechaNacimiento)";
+                        // Asignar los valores a los parámetros
+                        command.Parameters.AddWithValue("@Nombre", izenBerria);
+                        command.Parameters.AddWithValue("@Apellido", abizenBerria);
+                        command.Parameters.AddWithValue("@kkorrontea", kKorronteBerria);
+                        command.Parameters.AddWithValue("@FechaNacimiento", jDataBerriaSt);
 
-                        // Abrir la conexión
-                        connection.Open();
-
-                        // Crear el comando con la consulta y la conexión
-                        using (MySqlCommand command = new MySqlCommand(query, connection))
-                        {
-                            // Asignar los valores a los parámetros
-                            command.Parameters.AddWithValue("@Nombre", izenBerria);
-                            command.Parameters.AddWithValue("@Apellido", abizenBerria);
-                            command.Parameters.AddWithValue("@kkorrontea", kKorronteBerria);
-                            command.Parameters.AddWithValue("@FechaNacimiento", jDataBerriaSt);
-
-                            // Ejecutar la consulta
-                            command.ExecuteNonQuery();
-                        }
-                        textBox2.Text="";
-                        textBox3.Text="";
-                        textBox4.Text="";
+                        // Ejecutar la consulta
+                        command.ExecuteNonQuery();
+                    }
+                    textBox2.Text = "";
+                    textBox3.Text = "";
+                    textBox4.Text = "";
 
                 }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error: " + ex.Message);
-                    }
-                    finally 
-                    { 
-                        connection.Close();
-                        CargarDatos();
-                    }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
                 }
-
-
+                finally
+                {
+                    connection.Close();
+                    CargarDatos();
+                }
             }
+
+
+        }
 
         private void button3_Click(object sender, EventArgs e)
         {
             if (this.idLangileaSeleccionado > 0)
             {
                 // Mostrar un cuadro de diálogo para confirmar si se desea borrar el langilea
-                DialogResult result = MessageBox.Show("Seguru zaide langile hau ezabatu nahi duzula?",
-                                                      "ERANTZUN!",
+                DialogResult result = MessageBox.Show("¿Estás seguro de que deseas borrar el langilea seleccionado?",
+                                                      "Confirmación",
                                                       MessageBoxButtons.YesNo,
                                                       MessageBoxIcon.Warning);
 
@@ -212,8 +212,8 @@ namespace DA_2ENTREGA
                     // Tu cadena de conexión a MySQL
                     string connectionString = "server=localhost;port=3306;user id=root;password=1WMG2023;database=da_2entrega;SslMode=none";
 
-                    // Consulta SQL para realizar un soft delete (actualizar la columna 'borratua')
-                    string query = "UPDATE langilea SET borratua = 1 WHERE id = @idLangilea";
+                    // Consulta SQL para realizar un soft delete (actualizar las columnas 'borratua', 'deleted_by' y 'deleted_at')
+                    string query = "UPDATE langilea SET borratua = 1, deleted_by = @deletedBy, deleted_at = @deletedAt WHERE id = @idLangilea";
 
                     // Usamos MySqlConnection y MySqlCommand
                     using (MySqlConnection connection = new MySqlConnection(connectionString))
@@ -226,7 +226,12 @@ namespace DA_2ENTREGA
                             // Creamos el comando con la consulta
                             using (MySqlCommand command = new MySqlCommand(query, connection))
                             {
-                                // Añadimos el parámetro para evitar inyección de SQL
+                                // Suponiendo que 'idUsuarioActual' es el ID del usuario que está realizando la operación
+                                int idUsuarioActual = UserSession.IdErabiltzailea; // Cambia este valor según tu lógica de aplicación
+
+                                // Asignamos los parámetros para evitar inyección de SQL
+                                command.Parameters.AddWithValue("@deletedBy", idUsuarioActual);
+                                command.Parameters.AddWithValue("@deletedAt", DateTime.Now); // Fecha y hora actual
                                 command.Parameters.AddWithValue("@idLangilea", this.idLangileaSeleccionado);
 
                                 // Ejecutamos la consulta

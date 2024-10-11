@@ -29,7 +29,7 @@ namespace DA_2ENTREGA
             {
                 connection.Open();
 
-                string query = "SELECT erabiltzaileIzena FROM erabiltzailea;";
+                string query = "SELECT langilea_id, erabiltzaileIzena FROM erabiltzailea;";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
@@ -37,6 +37,7 @@ namespace DA_2ENTREGA
                 while (reader.Read())
                 {
                     string erabiltzaileIzena = reader.GetString("erabiltzaileIzena");
+                    int idErabiltzailea = reader.GetInt32("langilea_id");
                     comboBox1.Items.Add(erabiltzaileIzena);
                 }
 
@@ -72,9 +73,10 @@ namespace DA_2ENTREGA
             }
             else
             {
-                UserSession.ErabiltzaileIzena = comboBox1.SelectedItem.ToString();
-                //string erabiltzaile = UserSession.ErabiltzaileIzena;
-                //Console.WriteLine("Erabiltzaile aukeratua: " + erabiltzaile);
+                var selectedItem = comboBox1.SelectedItem as dynamic; // Obtener el item seleccionado
+                UserSession.ErabiltzaileIzena = selectedItem.Text; // Guardar el nombre
+                UserSession.IdErabiltzailea = selectedItem.Value; // Guardar el ID
+
                 Form2 form2 = new Form2();
                 form2.Show();
             }
@@ -87,6 +89,7 @@ namespace DA_2ENTREGA
     public static class UserSession
     {
         public static string ErabiltzaileIzena { get; set; }
+        public static int IdErabiltzailea { get; set; }
     }
 }
 
