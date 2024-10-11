@@ -24,8 +24,8 @@ DROP TABLE IF EXISTS `erabiltzailea`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `erabiltzailea` (
   `langilea_id` int NOT NULL,
-  `erabiltzaileIzena` varchar(20) NOT NULL,
-  `erabiltzailePasahitza` varchar(25) NOT NULL,
+  `erabiltzaileIzena` varchar(255) NOT NULL,
+  `erabiltzailePasahitza` varchar(255) NOT NULL,
   PRIMARY KEY (`langilea_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -49,8 +49,8 @@ DROP TABLE IF EXISTS `langilea`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `langilea` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `izena` varchar(15) NOT NULL,
-  `abizena` varchar(20) NOT NULL,
+  `izena` varchar(255) NOT NULL,
+  `abizena` varchar(255) NOT NULL,
   `kKorrontea` char(24) NOT NULL,
   `jaiotzeData` date NOT NULL,
   PRIMARY KEY (`id`)
@@ -76,4 +76,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-10 19:22:28
+-- Dump completed on 2024-10-11 17:07:45
