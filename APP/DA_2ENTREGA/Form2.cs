@@ -67,7 +67,8 @@ namespace DA_2ENTREGA
             string connectionString = "server=localhost;port=3306;user id=root;password=1WMG2023;database=da_2entrega;SslMode=none";
 
             // La consulta SQL que quieres ejecutar
-            string query = "SELECT id, izena, abizena, kKorrontea, jaiotzeData FROM da_2entrega.langilea";
+            string query = "SELECT id, izena, abizena, kKorrontea, jaiotzeData FROM da_2entrega.langilea WHERE borratua IS NULL";
+
 
             // Usamos MySqlConnection, MySqlCommand, y MySqlDataAdapter
             using (MySqlConnection connection = new MySqlConnection(connectionString))
