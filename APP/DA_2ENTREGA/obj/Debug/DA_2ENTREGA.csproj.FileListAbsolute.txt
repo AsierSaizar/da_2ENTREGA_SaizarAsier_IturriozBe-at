@@ -132,3 +132,4 @@ C:\Users\asier\Desktop\DA_2ENTREGA\da_2ENTREGA_SaizarAsier_IturriozBe-at\APP\DA_
 C:\Users\Beñat\Desktop\DA_2ENTREGA\da_2ENTREGA_SaizarAsier_IturriozBe-at\APP\DA_2ENTREGA\obj\Debug\DA_2ENTREGA.Form3.resources
 C:\Users\asier\Desktop\DA_2ENTREGA\da_2ENTREGA_SaizarAsier_IturriozBe-at\APP\DA_2ENTREGA\obj\Debug\DA_2ENTREGA.Form3.resources
 C:\Users\asier\Desktop\DA_2ENTREGA\da_2ENTREGA_SaizarAsier_IturriozBe-at\APP\DA_2ENTREGA\obj\Debug\DA_2ENTREGA.Form4.resources
+C:\Users\Beñat\Desktop\DA_2ENTREGA\da_2ENTREGA_SaizarAsier_IturriozBe-at\APP\DA_2ENTREGA\obj\Debug\DA_2ENTREGA.Form4.resources
