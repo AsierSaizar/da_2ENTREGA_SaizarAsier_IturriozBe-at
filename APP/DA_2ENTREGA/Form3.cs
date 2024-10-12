@@ -69,10 +69,10 @@ namespace DA_2ENTREGA
 
 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     // Manejo de errores
-                    MessageBox.Show("Error: " + ex.Message);
+                    MessageBox.Show("Iada erabiltzailea da langile hau ");
 
 
                 }

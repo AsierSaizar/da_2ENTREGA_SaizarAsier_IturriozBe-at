@@ -17,8 +17,7 @@ namespace DA_2ENTREGA
             InitializeComponent();
             CargarDatos();
             IzenBuruaJarri();
-
-            dataGridView2.SelectionChanged += new EventHandler(dataGridView2_SelectionChanged);
+            
 
         }
 
@@ -266,6 +265,17 @@ namespace DA_2ENTREGA
             {
                 MessageBox.Show("Selecciona un langilea antes de continuar.");
             }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Form4 form4 = new Form4();
+            form4.Show();
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
