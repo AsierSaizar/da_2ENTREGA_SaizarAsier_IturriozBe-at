@@ -89,12 +89,66 @@ namespace DA_2ENTREGA
 
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
 
-        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (idLangileaSeleccionado == -1)
+            {
+                MessageBox.Show("No se ha seleccionado ningún langilea para borrar.");
+                return;
+            }
+
+            // Confirmar eliminación
+            DialogResult confirmResult = MessageBox.Show("¿Estás seguro de que deseas eliminar permanentemente este langilea y todos los registros asociados?",
+                                                         "Confirmar eliminación",
+                                                         MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
+            {
+                // Cadena de conexión a MySQL
+                string connectionString = "server=localhost;port=3306;user id=root;password=1WMG2023;database=da_2entrega;SslMode=none";
+
+                // Consulta SQL para eliminar el registro de langilea
+                string deleteQuery = "DELETE FROM langilea WHERE id = @idLangilea";
+
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    try
+                    {
+                        // Abrimos la conexión
+                        connection.Open();
+
+                        // Preparamos el comando SQL para la eliminación
+                        MySqlCommand cmd = new MySqlCommand(deleteQuery, connection);
+                        cmd.Parameters.AddWithValue("@idLangilea", idLangileaSeleccionado);
+
+                        // Ejecutamos la consulta
+                        int rowsAffected = cmd.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("El langilea ha sido eliminado correctamente.");
+                            // Recargar los datos para reflejar los cambios en el DataGridView
+                            CargarDatos();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se encontró el langilea o no se pudo eliminar.");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // Manejo de errores
+                        MessageBox.Show("Error al eliminar el langilea: " + ex.Message);
+                    }
+                }
+            }
+        }
+
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
         {
 
         }

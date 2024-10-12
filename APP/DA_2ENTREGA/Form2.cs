@@ -17,39 +17,12 @@ namespace DA_2ENTREGA
             InitializeComponent();
             CargarDatos();
             IzenBuruaJarri();
-            
+
+            dataGridView2.SelectionChanged += new EventHandler(dataGridView2_SelectionChanged);
+
+            dataGridView2.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
         }
-
-        private void Form2_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                string conexiodatuak = "server=localhost;port=3306;user id=root;password=1WMG2023;database=da_2entrega;SslMode=none";
-                connection.Open();
-            }
-            catch
-            {
-                MessageBox.Show("Konexio arazoak");
-
-            }
-
-            try
-            {
-                string query = "SELECT * FROM da_2entrega.langilea";
-                MySqlDataAdapter dataAdapter = new MySqlDataAdapter();
-                dataAdapter.SelectCommand = new MySqlCommand(query, connection);
-                DataTable table = new DataTable();
-                dataAdapter.Fill(table);
-                dataGridView1.DataSource = table;
-            }
-            catch
-            {
-                MessageBox.Show("irakurketa arazoak");
-            }
-        }
-
-
 
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -103,13 +76,16 @@ namespace DA_2ENTREGA
                 DataGridViewRow filaSeleccionada = dataGridView2.SelectedRows[0];
 
                 // Obtenemos el valor de la columna "id_langilea" y lo guardamos en una variable
-                int idLangileaSeleccionado = Convert.ToInt32(filaSeleccionada.Cells["id"].Value);
+                idLangileaSeleccionado = Convert.ToInt32(filaSeleccionada.Cells["id"].Value);
 
-                // Mostrar en un TextBox u otro control si lo deseas
-                textBox1.Text = filaSeleccionada.Cells["izena"].Value.ToString();
-
-                // Guardamos el valor en una variable de clase para usarlo al abrir el siguiente formulario
-                this.idLangileaSeleccionado = idLangileaSeleccionado; // Variable de clase
+                if (filaSeleccionada.Cells["izena"] != null && filaSeleccionada.Cells["izena"].Value != DBNull.Value)
+                {
+                    textBox1.Text = filaSeleccionada.Cells["izena"].Value.ToString();
+                }
+                else
+                {
+                    textBox1.Text = ""; // Si no hay valor, limpiamos el TextBox
+                }
             }
         }
 
@@ -130,7 +106,6 @@ namespace DA_2ENTREGA
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            //Console.WriteLine(textBox1);
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -140,7 +115,6 @@ namespace DA_2ENTREGA
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -150,7 +124,6 @@ namespace DA_2ENTREGA
             String kKorronteBerria = textBox4.Text;
             DateTime jDataBerria = dateTimePicker1.Value;
             String jDataBerriaSt = jDataBerria.ToString("yyyy-MM-dd");
-            Console.WriteLine(izenBerria);
 
             // Tu cadena de conexión a MySQL
             string connectionString = "server=localhost;port=3306;user id=root;password=1WMG2023;database=da_2entrega;SslMode=none";
