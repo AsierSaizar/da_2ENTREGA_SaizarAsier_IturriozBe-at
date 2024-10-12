@@ -159,6 +159,8 @@ namespace DA_2ENTREGA
                     textBox3.Text = "";
                     textBox4.Text = "";
 
+                    MessageBox.Show("Langilea ongi sortu da.");
+
                 }
                 catch (Exception ex)
                 {
