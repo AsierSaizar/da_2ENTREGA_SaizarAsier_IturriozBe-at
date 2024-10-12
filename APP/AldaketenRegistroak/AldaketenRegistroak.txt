@@ -1,0 +1,2 @@
+2024-10-12 13:59:56 - Usuario 1 realizó 'borrar' sobre langilea con ID 45
+2024-10-12 14:03:36 - Erabilztaileak: 1 id-arekin akzioa hau egin du 'crear' id hau  -1 daukan langileari.

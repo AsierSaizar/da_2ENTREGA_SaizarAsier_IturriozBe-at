@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -151,6 +152,9 @@ namespace DA_2ENTREGA
                         // Ejecutar la consulta
                         command.ExecuteNonQuery();
                     }
+
+                    RegistrarMovimiento("crear", UserSession.IdErabiltzailea);
+
                     textBox2.Text = "";
                     textBox3.Text = "";
                     textBox4.Text = "";
@@ -214,6 +218,8 @@ namespace DA_2ENTREGA
                                 if (filasAfectadas > 0)
                                 {
                                     MessageBox.Show("El langilea ha sido borrado correctamente (soft delete).");
+
+                                    RegistrarMovimiento("borrar", idUsuarioActual, this.idLangileaSeleccionado);
                                 }
                                 else
                                 {
@@ -250,6 +256,42 @@ namespace DA_2ENTREGA
         {
 
         }
+        private void RegistrarMovimiento(string accion, int idUsuario, int idLangilea = -1)
+        {
+            // Obtener la ruta base de la aplicación
+            string rutaBase = AppDomain.CurrentDomain.BaseDirectory;
+
+            // Construir la ruta relativa a la carpeta "AldaketenRegistroak"
+            string carpetaRegistro = Path.Combine(rutaBase, @"..\..\..\AldaketenRegistroak");
+
+            // Asegurarse de que la carpeta existe
+            if (!Directory.Exists(carpetaRegistro))
+            {
+                Directory.CreateDirectory(carpetaRegistro);
+            }
+
+            // Definir el archivo donde se registrarán los movimientos
+            string filePath = Path.Combine(carpetaRegistro, "AldaketenRegistroak.txt");
+
+            // Obtener la fecha y hora actual
+            string fechaHora = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+            // Crear el mensaje que se guardará en el archivo
+            string mensaje = $"{fechaHora} - Erabilztaileak: {idUsuario} id-arekin akzioa hau egin du '{accion}' id hau  {idLangilea} daukan langileari.\n";
+
+            // Escribir en el archivo. Si el archivo no existe, lo creará.
+            try
+            {
+                System.IO.File.AppendAllText(filePath, mensaje);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al registrar movimiento: " + ex.Message);
+            }
+        }
+
+
     }
+
 }
 
