@@ -98,13 +98,13 @@ namespace DA_2ENTREGA
         {
             if (idLangileaSeleccionado == -1)
             {
-                MessageBox.Show("No se ha seleccionado ningún langilea para borrar.");
+                MessageBox.Show("Ez dago langilerik aukeratuta.");
                 return;
             }
 
             // Confirmar eliminación
-            DialogResult confirmResult = MessageBox.Show("¿Estás seguro de que deseas eliminar permanentemente este langilea y todos los registros asociados?",
-                                                         "Confirmar eliminación",
+            DialogResult confirmResult = MessageBox.Show("Seguru zaude borratu nahi duzula erregistro hau eta lotutako erregostroak ere?(Ezin izango da errekuperatu)",
+                                                         "Ezabaketa konfirmatu.",
                                                          MessageBoxButtons.YesNo);
             if (confirmResult == DialogResult.Yes)
             {
@@ -130,19 +130,19 @@ namespace DA_2ENTREGA
 
                         if (rowsAffected > 0)
                         {
-                            MessageBox.Show("El langilea ha sido eliminado correctamente.");
+                            MessageBox.Show("Langilea ongi ezabatua izan da.");
                             // Recargar los datos para reflejar los cambios en el DataGridView
                             CargarDatos();
                         }
                         else
                         {
-                            MessageBox.Show("No se encontró el langilea o no se pudo eliminar.");
+                            MessageBox.Show("Langilea ezin izan da aurkitu edo ezin izan da ezabatu.");
                         }
                     }
                     catch (Exception ex)
                     {
                         // Manejo de errores
-                        MessageBox.Show("Error al eliminar el langilea: " + ex.Message);
+                        MessageBox.Show("Arazoa langilea ezabatzean: " + ex.Message);
                     }
                 }
             }
