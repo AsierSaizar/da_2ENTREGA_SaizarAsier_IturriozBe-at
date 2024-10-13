@@ -1,2 +1,12 @@
 2024-10-12 13:59:56 - Usuario 1 realizó 'borrar' sobre langilea con ID 45
 2024-10-12 14:03:36 - Erabilztaileak: 1 id-arekin akzioa hau egin du 'crear' id hau  -1 daukan langileari.
+2024-10-13 13:26:39 - Erabilztaileak: 1 id-arekin akzioa hau egin du 'borrar' id hau  49 daukan langileari.
+2024-10-13 13:26:51 - Erabilztaileak: 1 id-arekin akzioa hau egin du 'borrar' id hau  50 daukan langileari.
+2024-10-13 15:17:02 - Erabilztaileak: 1 id-arekin langile berri bat sortu du 3 izenarekin' .
+2024-10-13 15:43:31 - Erabilztaileak: 3 id-arekin langile berri bat sortu du a izenarekin' .
+2024-10-13 15:43:58 - Erabilztaileak: 3 id-arekin langile berri bat sortu du q izenarekin' .
+2024-10-13 15:44:14 - Erabilztaileak: 3 id-arekin akzioa hau egin du 'borrar' id hau  1 daukan langileari.
+2024-10-13 15:44:47 - Erabilztaileak: 3 id-arekin langile berri bat sortu du a izenarekin' .
+2024-10-13 15:45:11 - Erabilztaileak: 3 id-arekin akzioa hau egin du 'Erabiltzaile bihurtu' id hau  52 daukan langileari.
+2024-10-13 15:45:27 - Erabilztaileak: 3 id-arekin akzioa hau egin du 'borrar' id hau  52 daukan langileari.
+2024-10-13 15:45:38 - Erabilztaileak: 3 id-arekin akzioa hau egin du 'Hard delete' id hau  17 daukan langileari.

@@ -153,7 +153,7 @@ namespace DA_2ENTREGA
                         command.ExecuteNonQuery();
                     }
 
-                    RegistrarMovimiento("crear", UserSession.IdErabiltzailea);
+                    RegistrarMovimiento("crear", UserSession.IdErabiltzailea,0, izenBerria);
 
                     textBox2.Text = "";
                     textBox3.Text = "";
@@ -221,7 +221,7 @@ namespace DA_2ENTREGA
                                 {
                                     MessageBox.Show("El langilea ha sido borrado correctamente (soft delete).");
 
-                                    RegistrarMovimiento("borrar", idUsuarioActual, this.idLangileaSeleccionado);
+                                    RegistrarMovimiento("borrar", idUsuarioActual, this.idLangileaSeleccionado, "izenaEzertako");
                                 }
                                 else
                                 {
@@ -258,7 +258,7 @@ namespace DA_2ENTREGA
         {
 
         }
-        private void RegistrarMovimiento(string accion, int idUsuario, int idLangilea = -1)
+        private void RegistrarMovimiento(string accion, int idUsuario, int idLangilea, String izenaCrear)
         {
             // Obtener la ruta base de la aplicación
             string rutaBase = AppDomain.CurrentDomain.BaseDirectory;
@@ -278,18 +278,36 @@ namespace DA_2ENTREGA
             // Obtener la fecha y hora actual
             string fechaHora = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
-            // Crear el mensaje que se guardará en el archivo
-            string mensaje = $"{fechaHora} - Erabilztaileak: {idUsuario} id-arekin akzioa hau egin du '{accion}' id hau  {idLangilea} daukan langileari.\n";
+            if (idLangilea == 0)
+            {
+                // Crear el mensaje que se guardará en el archivo
+                string mensaje = $"{fechaHora} - Erabilztaileak: {idUsuario} id-arekin langile berri bat sortu du {izenaCrear} izenarekin' .\n";
+                // Escribir en el archivo. Si el archivo no existe, lo creará.
+                try
+                {
+                    System.IO.File.AppendAllText(filePath, mensaje);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al registrar movimiento: " + ex.Message);
+                }
+            }
+            else
+            {
+                // Crear el mensaje que se guardará en el archivo
+                string mensaje = $"{fechaHora} - Erabilztaileak: {idUsuario} id-arekin akzioa hau egin du '{accion}' id hau  {idLangilea} daukan langileari.\n";
+                // Escribir en el archivo. Si el archivo no existe, lo creará.
+                try
+                {
+                    System.IO.File.AppendAllText(filePath, mensaje);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al registrar movimiento: " + ex.Message);
+                }
+            }
 
-            // Escribir en el archivo. Si el archivo no existe, lo creará.
-            try
-            {
-                System.IO.File.AppendAllText(filePath, mensaje);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al registrar movimiento: " + ex.Message);
-            }
+            
         }
 
 
