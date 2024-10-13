@@ -12,8 +12,6 @@ using MySql.Data.MySqlClient;
 
 namespace DA_2ENTREGA
 {
-    
-
     public partial class Form1 : Form
     {
         private MySqlConnection connection;
@@ -60,11 +58,6 @@ namespace DA_2ENTREGA
         private void label1_Click(object sender, EventArgs e)
         {
         }
-
-        private void Erabiltzaiea_TextChanged(object sender, EventArgs e)
-        {
-        }
-
         private void SaioaHasiButton_Click(object sender, EventArgs e)
         {
             {
@@ -74,39 +67,32 @@ namespace DA_2ENTREGA
                 }
                 else
                 {
-                    // Obtener el nombre del usuario seleccionado
                     string selectedErabiltzaileIzena = comboBox1.SelectedItem.ToString();
 
-                    // Nueva consulta a la base de datos para obtener el ID del usuario seleccionado
                     string query = "SELECT langilea_id FROM erabiltzailea WHERE erabiltzaileIzena = @erabiltzaileIzena";
                     MySqlCommand command = new MySqlCommand(query, connection);
 
-                    // Añadir el parámetro para evitar SQL injection
                     command.Parameters.AddWithValue("@erabiltzaileIzena", selectedErabiltzaileIzena);
 
                     try
                     {
                         connection.Open();
 
-                        // Ejecutar la consulta
                         MySqlDataReader reader = command.ExecuteReader();
 
                         if (reader.Read())
                         {
-                            // Obtener el ID del usuario
                             int idErabiltzailea = reader.GetInt32("langilea_id");
 
-                            // Guardar la información en UserSession
                             UserSession.ErabiltzaileIzena = selectedErabiltzaileIzena;
                             UserSession.IdErabiltzailea = idErabiltzailea;
 
-                            // Abrir la nueva ventana
                             Form2 form2 = new Form2();
                             form2.Show();
                         }
                         else
                         {
-                            Console.WriteLine("No se encontró el usuario en la base de datos.");
+                            Console.WriteLine("Erabiltzailea ez da datu-basean aurkitu.");
                         }
 
                         reader.Close();
@@ -127,10 +113,12 @@ namespace DA_2ENTREGA
         {
         }
     }
+
     public static class UserSession
     {
         public static string ErabiltzaileIzena { get; set; }
         public static int IdErabiltzailea { get; set; }
     }
 }
+
 
